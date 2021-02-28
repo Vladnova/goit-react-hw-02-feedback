@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FeedbackOptions = ({ value, onLeaveFeedback }) => {
   return value.map(([key]) => (
@@ -8,16 +9,13 @@ const FeedbackOptions = ({ value, onLeaveFeedback }) => {
   ));
 };
 
-export default FeedbackOptions;
+FeedbackOptions.defaultProps = {
+  value: [],
+};
 
-// {
-//   comments.map(comment => (
-//     <button
-//       type="button"
-//       key={comment[0]}
-//       onClick={() => this.leaveFeedback(comment[0])}
-//     >
-//       {comment[0]}
-//     </button>
-//   ));
-// }
+FeedbackOptions.propTypes = {
+  onLeaveFeedback: PropTypes.func.isRequired,
+  // value: PropTypes.arrayOf(PropTypes.string),
+};
+
+export default FeedbackOptions;

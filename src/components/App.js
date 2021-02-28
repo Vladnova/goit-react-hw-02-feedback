@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FeedbackOptions from './FeedbackOptions';
+import Notification from './Notification/Notification';
+import Section from './Section';
 import Statistics from './Statistics';
 
 class App extends Component {
@@ -14,36 +16,42 @@ class App extends Component {
       [name]: prevState[name] + 1,
     }));
   };
-  //
-  countTotalFeedback(values) {
-    return values.reduce((acc, value) => acc + value[1], 0);
+
+  countTotalFeedback() {
+    // return values.reduce((acc, value) => acc + value[1], 0);
+    let numbers = Object.values(this.state);
+    return numbers.reduce((acc, value) => acc + value, 0);
   }
 
-  countPositiveFeedbackPercentage(good, total) {
-    if (!good[1]) {
+  countPositiveFeedbackPercentage() {
+    const { good } = this.state;
+    if (!good) {
       return 0;
     }
-    const allTotal = total.reduce((acc, value) => acc + value[1], 0);
-    return Math.round((good[1] / allTotal) * 100);
+    return Math.round((good / this.countTotalFeedback()) * 100);
+    // const allTotal = total.reduce((acc, value) => acc + value[1], 0);
+    // return Math.round((good[1] / allTotal) * 100);
   }
 
   render() {
     const comments = Object.entries(this.state);
 
     return (
-      <div>
-        <h1>Please leave feedback</h1>
-
+      <Section title="Please leave feedback">
         <FeedbackOptions
           value={comments}
           onLeaveFeedback={this.leaveFeedback}
         />
-        <Statistics
-          options={comments}
-          total={this.countTotalFeedback}
-          positivePercentage={this.countPositiveFeedbackPercentage}
-        />
-      </div>
+        {this.countTotalFeedback() ? (
+          <Statistics
+            options={comments}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        ) : (
+          <Notification message="No feedback given" />
+        )}
+      </Section>
     );
   }
 }
