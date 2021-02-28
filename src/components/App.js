@@ -18,19 +18,13 @@ class App extends Component {
   };
 
   countTotalFeedback() {
-    // return values.reduce((acc, value) => acc + value[1], 0);
     let numbers = Object.values(this.state);
     return numbers.reduce((acc, value) => acc + value, 0);
   }
 
   countPositiveFeedbackPercentage() {
     const { good } = this.state;
-    if (!good) {
-      return 0;
-    }
     return Math.round((good / this.countTotalFeedback()) * 100);
-    // const allTotal = total.reduce((acc, value) => acc + value[1], 0);
-    // return Math.round((good[1] / allTotal) * 100);
   }
 
   render() {

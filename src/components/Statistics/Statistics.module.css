@@ -1,0 +1,24 @@
+.titleStatistic {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  margin-bottom: 10px;
+}
+
+.miniTitle {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.miniTitle:not(:last-child) {
+  margin-bottom: 10px;
+}

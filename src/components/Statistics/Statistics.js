@@ -1,25 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './Statistics.module.css';
 
 const Statistics = ({ options, total, positivePercentage }) => (
-  <>
-    <h2>Statistics</h2>
-    <ul>
+  <div>
+    <h2 className={styles.titleStatistic}>Statistics</h2>
+    <ul className={styles.list}>
       {options.map(([key, value]) => (
-        <li key={key}>
+        <li className={styles.item} key={key}>
           {key}:{value}
         </li>
       ))}
     </ul>
-    <p>Total:{total}</p>
-    <p>Positive feedback: {positivePercentage} %</p>
-  </>
+    <p className={styles.miniTitle}>Total:{total}</p>
+    <p className={styles.miniTitle}>
+      Positive feedback: {positivePercentage} %
+    </p>
+  </div>
 );
 
 Statistics.propTypes = {
   total: PropTypes.number.isRequired,
   positivePercentage: PropTypes.number.isRequired,
-  // options:
+  options: PropTypes.arrayOf(PropTypes.array).isRequired,
 };
 
 export default Statistics;
