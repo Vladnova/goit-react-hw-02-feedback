@@ -14,7 +14,7 @@ class App extends Component {
       [name]: prevState[name] + 1,
     }));
   };
-
+  //
   countTotalFeedback(values) {
     return values.reduce((acc, value) => acc + value[1], 0);
   }
